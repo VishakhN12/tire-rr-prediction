@@ -11,7 +11,7 @@ disp(data.Properties.VariableNames')
 %% 2: NUMERIC CONVERSION
 toNum = @(x) str2double(string(x));
 
-%% 3: BASIC INPUT FEATURES (NO REDUNDANCY)
+%% 3: BASIC INPUT FEATURES
 
 weight = toNum(data.TYRE_WEIGHT_KG);
 load   = toNum(data.MAX_LOAD_SINGLE_KG);
@@ -23,12 +23,12 @@ sea  = toNum(data.SEA_100);
 arc_b2 = toNum(data.ARC_WIDTH_B2);
 arc_b3 = toNum(data.ARC_WIDTH_B3);
 
-%% 4: PHYSICS-BASED FEATURES (IMPORTANT FIX)
+%% 4: PHYSICS-BASED FEATURES
 
 OD_Growth = toNum(data.INFLATED_OD_CROWN) - toNum(data.UNINFLATED_OD_CROWN);
 SW_Growth = toNum(data.INFLATED_SW) - toNum(data.UNINFLATED_SW);
 
-%% 5: FINAL FEATURE MATRIX (CLEAN & NON-REDUNDANT)
+%% 5: FINAL FEATURE MATRIX 
 
 X = [
     weight,...
@@ -45,7 +45,7 @@ X = [
 %% 6: TARGET VARIABLE
 Y = toNum(data.RR_80KMPH);
 
-%% 7: REMOVE INVALID ROWS (VERY IMPORTANT)
+%% 7: REMOVE INVALID ROWS
 
 validRows = all(~isnan(X),2) & ~isnan(Y);
 
